@@ -41,7 +41,7 @@ func IPCountBetweenTwoIPString(ip1, ip2 string) (uint, error) {
 	return num2 - num1, nil
 }
 
-func Number2IP(num int) (net.IP, error) {
+func Number2IP(num uint) (net.IP, error) {
 	if num > math.MaxUint32 {
 		return nil, errors.New("beyond the scope of ipv4")
 	}
