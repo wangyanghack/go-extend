@@ -1,6 +1,7 @@
 package net
 
 import (
+	"math"
 	"net"
 
 	"github.com/pkg/errors"
@@ -38,4 +39,18 @@ func IPCountBetweenTwoIPString(ip1, ip2 string) (uint, error) {
 		return 0, errors.Wrap(err, "Get count between two ip")
 	}
 	return num2 - num1, nil
+}
+
+func Number2IP(num int) (net.IP, error) {
+	if num > math.MaxUint32 {
+		return nil, errors.New("beyond the scope of ipv4")
+	}
+
+	ip := make(net.IP, net.IPv4len)
+	ip[0] = byte(num >> 24)
+	ip[1] = byte(num >> 16)
+	ip[2] = byte(num >> 8)
+	ip[3] = byte(num)
+
+	return ip, nil
 }
