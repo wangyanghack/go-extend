@@ -13,3 +13,12 @@ func IP2Number(ip net.IP) (uint, error) {
 	}
 	return uint(b[3]) | uint(b[2])<<8 | uint(b[1])<<16 | uint(b[0])<<24, nil
 }
+
+func IPCountBetweenTwoIP(ip1, ip2 net.IP) (uint, error) {
+	num1, err := IP2Number(ip2)
+	num2, err := IP2Number(ip1)
+	if err != nil {
+		return 0, errors.Wrap(err, "Get count between two ip")
+	}
+	return num2 - num1, nil
+}
